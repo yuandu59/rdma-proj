@@ -21,6 +21,7 @@ sudo apt update
 
 安装rdma工具包（先更新）：
 sudo apt install infiniband-diags ibverbs-utils
+sudo apt install rdma-core libibverbs-dev librdmacm-dev -y
 
 检查系统是否启动了rdma设备：
 ls /sys/class/infiniband/
@@ -64,10 +65,36 @@ ibv_rc_pingpong 192.168.1.1
 《初态》
 1. 安装工具包
 
-2. 检查网卡存在，确认网卡name
+    sudo apt update
+
+    sudo apt install infiniband-diags ibverbs-utils
+    sudo apt install rdma-core libibverbs-dev librdmacm-dev -y
+
+2. 检查网卡存在，确认网卡<name>，获得网卡<id>
+
+    ls /sys/class/infiniband/
+
+    ls /sys/class/infiniband/<name>/device/net/
 
 3. 检查网卡物理连接
 
-4. 配置IP，发ping检测
+    ethtool <id>
+
+4. 配置IP（两个node），发ping检测
+
+    sudo ip addr add 192.168.1.1/24 dev <id>
+    sudo ip link set <id> up
+
+    sudo ip addr add 192.168.1.2/24 dev <id>
+    sudo ip link set <id> up
+
+    ping 192.168.1.2
+    ping 192.168.1.1
 
 5. pingpong指令测试rdma
+
+    ibv_rc_pingpong
+    
+    ibv_rc_pingpong 192.168.1.1
+
+6. scp传文件
