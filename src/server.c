@@ -33,7 +33,7 @@ int main() {
         .ai_family = AF_INET,
         .ai_socktype = SOCK_STREAM
     }, *res;
-    getaddrinfo(NULL, PORT, &hints, &res);
+    rdma_getaddrinfo(NULL, PORT, &hints, &res);
     rdma_bind_addr(listen_id, res->ai_addr);
     freeaddrinfo(res);
 
