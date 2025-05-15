@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <rdma/rdma_cma.h>
+#include <netdb.h>
+
 
 #define PORT "7471"
 #define BUF_SIZE 1024
