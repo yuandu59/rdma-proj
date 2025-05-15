@@ -1,4 +1,4 @@
-project(RDMATest VERSION 1.0 LANGUAGES C)
+project(RDMATest LANGUAGES C)
 
 cmake_minimum_required(VERSION 3.10)
 
